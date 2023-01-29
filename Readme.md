@@ -59,14 +59,14 @@ se irá pasando de función en función, hasta que alguien la maneje o llegue al
 script principal y termine el programa.
 
 La versión de _rust_ por otra parte, termina inmediatamente el programa al llegar 
-a la instsrucción panic, con el mensaje de error. No da oportunidad a las funciones
+a la instrucción panic, con el mensaje de error. No da oportunidad a las funciones
 que la llamaron de procesarla. Si bien, esto parece inútil o cuando menos raro,
 es parte de los beneficios de _rust_, ya que a diferencia de _python_, nos está
 asegurando una cosa, esta función siempre retornará un flotante de 32 bits.
 
-Sin embargo, abrá veces donde estaremos abiertos a una respuesta menos drastica.
+Sin embargo, habrá veces donde estaremos abiertos a una respuesta menos drástica.
 Es decir, queremos manejar el error y muy probrablemente queremos informar al 
-usuario de dicho error, usuarlmente para volverlo a intentar. Para estos casos 
+usuario de dicho error, usualmente para volverlo a intentar. Para estos casos 
 tenemos
 
 ### Errores recuperables
@@ -96,7 +96,7 @@ flotante 32 a algo llamado _Result_ y tenemos ahora algo que parecen funciones
 llamadas _Err_ y _Ok_
 
 Antes de explicar que es _Result_, centremonos en porqué se cambió el tipo de 
-retorno de la función. Como habia mencionado anterior mente, _rust_ busca que 
+retorno de la función. Como había mencionado anterior mente, _rust_ busca que 
 los programadores estén concientes de los posibles errores que cada parte del
 código pude producir y para esto utiliza simplemente el sistema de tipos.
 Esto hace que aún sin saber el lenguaje, podemos entender que esta función va a 
@@ -107,7 +107,7 @@ válido (_OK_)
 
 _Result_ no es más que un enum, un tipo de dato que delimita un conjunto de opciones
 a escoger y que solo puede ser una a la vez. En este caso las opciones de _Result__
-son _Err_ para idnicar un error y _Ok_ para indicar que todo está bien y el código
+son _Err_ para indicar un error y _Ok_ para indicar que todo está bien y el código
 se ejecutó correctamente.
 
 Otro factor interesante de _Result_ (y los enum de _rust_ en general) es que 
@@ -120,7 +120,7 @@ que tiene que manejar un posible error, si no de que tipo es cada posible result
 fn divide(a:f32, b:f32)->Result(f32, String){
 ```
 
-Los beneficios del enum _Result_ no acaban ahí, al ser un tipo estandar de _rust_
+Los beneficios del enum _Result_ no acaban ahí, al ser un tipo estándar de _rust_
 tiene métodos asociados que vuelven incluso más poderoso a este método de manejo
 de errores
 
@@ -136,17 +136,17 @@ match divide(0,2){
     }
 ```
 
-Match ejecuta una condición u otra dependiendo del tipo de dato de retorno de
-la función, en este caso imprimiria el error o el resultado
+Match ejecuta una instrucción u otra dependiendo del tipo de dato de retorno de
+la función, en este caso imprimiría el error o el resultado
 
 ##### Unwrap
 
 Match es excelente cuando se quiere realizar operaciones diferentes en caso de 
-error u ok, sin embargo, existen "acortadores" que reducen el cóidgo necesario
+error u ok, sin embargo, existen "acortadores" que reducen el código necesario
 en escenarios similares.
 
 Unwrap devuelve el resultado si fue de tipo Ok, e invoca a panic (error irrecuperable) 
-en caso de recibir un Err. Util para rápido prototipado o si el no recibir un
+en caso de recibir un Err. Útil para rápido prototipado o si el no recibir un
 valor adecuado representa irrecuperabilidad en el programa
 
 ```rs
@@ -154,7 +154,7 @@ let numeric_result = divide(0,2).unwrap();
 ```
 
 Existe otro método similar, llamado expect, que permite enviar una cadena a modo
-de mensaje de error, este metodo se llama expect
+de mensaje de error, este método se llama expect
 
 ```rs
 let numeric_result = divide(0,2).expect("Error al dividir");
@@ -164,7 +164,7 @@ let numeric_result = divide(0,2).expect("Error al dividir");
 
 El último patrón que tiene rust para manejar errores, es, similar a otros lenguajes, 
 dejar que funciones superiores lo manejen, con la diferencia que _rust_ requiere
-que el progamador lo haga de forma conciente, mediante el operador '?'.
+que el progamador lo haga de forma consciente, mediante el operador '?'.
 Este operador provoca que, en caso de que una llamada a función retorne un Err,
 este Err se retorne de inmediato.
 
